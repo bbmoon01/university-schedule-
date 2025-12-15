@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schedule</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Schedule</h1>
+          <p class="subtitle">Your classes for the selected group and day.</p>
+        </div>
+      </div>
+      <a class="link" href="/">Back</a>
+    </div>
+
+    <div class="card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Subject</th>
+            <th>Teacher</th>
+            <th>Classroom</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="l : ${lessons}">
+            <td>
+              <span class="pill" th:text="${l.start_time} + ' - ' + ${l.end_time}"></span>
+            </td>
+            <td th:text="${l.subject_name}"></td>
+            <td th:text="${l.teacher}"></td>
+            <td><span class="pill" th:text="${l.room_number}"></span></td>
+            <td><span class="pill" th:text="${l.type_name}"></span></td>
+          </tr>
+
+          <tr th:if="${#lists.isEmpty(lessons)}">
+            <td colspan="5" style="padding:16px; color:#6b7280;">
+              No lessons found for this group/day.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="footer">
+        Generated from Neon database.
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

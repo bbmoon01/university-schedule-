@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Schedule</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>University Schedule</h1>
+          <p class="subtitle">Select your group and day to view classes.</p>
+        </div>
+      </div>
+      <div class="badge">Neon DB • Spring Boot</div>
+    </div>
+
+    <div class="card">
+      <form action="/schedule" method="get">
+        <div class="grid">
+          <div>
+            <label class="label">Group</label>
+            <select class="select" name="groupId" required>
+              <option th:each="g : ${groups}"
+                      th:value="${g.group_id}"
+                      th:text="${g.group_name}">
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label class="label">Day</label>
+            <select class="select" name="dayId" required>
+              <option th:each="d : ${days}"
+                      th:value="${d.day_id}"
+                      th:text="${d.day_name}">
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" type="submit">Show schedule</button>
+          <a class="link" href="/db-test">DB test</a>
+        </div>
+      </form>
+
+      <div class="footer">
+        Tip: if your day names are in Russian now, you can keep them (works fine) or we can translate later.
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
